@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">LoginProf</string>
+    <string name="login" tools:ignore="ExtraTranslation">Entrar</string>
+    <string name="subtitle" tools:ignore="ExtraTranslation">Por favor, digite suas informações</string>
+    <string name="email" tools:ignore="ExtraTranslation">Digite seu e-mail</string>
+    <string name="password" tools:ignore="ExtraTranslation">Digite sua senha</string>
+    <string name="enter" tools:ignore="ExtraTranslation">ENTRAR</string>
+</resources>
