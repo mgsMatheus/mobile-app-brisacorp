@@ -38,6 +38,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.fiap.myapplication.R
 import br.com.fiap.myapplication.ui.theme.Green60
 import br.com.fiap.myapplication.ui.theme.Grey20
@@ -58,25 +59,46 @@ val paciente = Paciente(
 
 
 @Composable
-fun DashboardScreen() {
+fun DashboardScreen(navController: NavController) {
     Column(modifier = Modifier.fillMaxSize()) {
         UserInfo(paciente)
         PlanoBox()
         Spacer(modifier = Modifier.height(15.dp))
         QRCodeBox()
         Spacer(modifier = Modifier.height(15.dp))
-        BoxModel(title = "Últimos atendimentos", date = "11/11/2023", especialidade = "Cardiologista", "Dra Ana Maria")
+        BoxModel(title = "Últimos atendimentos",
+            date = "11/11/2023",
+            especialidade = "Cardiologista", "Dra Ana Maria")
         Spacer(modifier = Modifier.height(20.dp))
-        BoxModel2(title = "Agenda", date = "11/11/2023", especialidade = "Cardiologista", "José Alves da silva")
+        BoxModel2(title = "Agenda",
+            date = "11/11/2023",
+            especialidade = "Cardiologista", "José Alves da silva")
         Spacer(modifier = Modifier.height(80.dp))
-        BottomBar()
+        BottomBar(navController)
     }
 }
 @Composable
 fun PlanoBox(){
-    Column(modifier = Modifier.height(60.dp).fillMaxWidth().background(Green60), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-        Text("Plano Médico", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight(600))
-        Text(paciente.plano,  color = Color.White,  fontSize = 20.sp, fontWeight = FontWeight(400))
+    Column(
+        modifier = Modifier
+            .height(60.dp)
+            .fillMaxWidth()
+            .background(Green60),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            "Plano Médico",
+            color = Color.White,
+            fontSize = 24.sp,
+            fontWeight = FontWeight(600)
+        )
+        Text(
+            paciente.plano,
+            color = Color.White,
+            fontSize = 20.sp,
+            fontWeight = FontWeight(400)
+        )
     }
 }
 
@@ -86,61 +108,129 @@ fun PlanoBox(){
 fun QRCodeBox() {
     val imageResource: Painter = painterResource(R.drawable.user)
     Row(modifier = Modifier.height(100.dp).fillMaxWidth().padding(horizontal = 15.dp)){
-        Box(contentAlignment = Alignment.Center, modifier = Modifier.height(180.dp).fillMaxWidth().border(width = 2.dp, shape = RoundedCornerShape(10.dp), color = Grey20)){
+        Box(contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .height(180.dp)
+                .fillMaxWidth()
+                .border(width = 2.dp,
+                    shape = RoundedCornerShape(10.dp),
+                    color = Grey20)){
             Column {
-                Image(modifier = Modifier.height(80.dp), painter = imageResource, contentDescription = "Imagem de usuário")
-                Text("LER QRCode", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Image(modifier = Modifier.height(80.dp),
+                    painter = imageResource,
+                    contentDescription = "Imagem de usuário")
+                Text("LER QRCode",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold)
             }
         }
     }
 }
 
 @Composable
-fun BoxModel(title: String, date: String, especialidade: String, doutor: String ) {
-    Row(modifier = Modifier.fillMaxWidth().height(90.dp).padding(horizontal = 15.dp)){
-        Box(contentAlignment = Alignment.TopStart, modifier = Modifier.height(180.dp).fillMaxWidth().border(width = 2.dp, shape = RoundedCornerShape(10.dp), color = Grey20)){
-            Column(modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)) {
+fun BoxModel(title: String,
+             date: String,
+             especialidade: String,
+             doutor: String
+) {
+    Row(modifier = Modifier
+        .fillMaxWidth()
+        .height(90.dp)
+        .padding(horizontal = 15.dp)
+    ){
+        Box(contentAlignment = Alignment.TopStart,
+            modifier = Modifier.height(180.dp)
+                .fillMaxWidth()
+                .border(width = 2.dp,
+                    shape = RoundedCornerShape(10.dp),
+                    color = Grey20)){
+            Column(modifier = Modifier
+                .padding(horizontal = 10.dp,
+                    vertical = 5.dp))
+            {
                 Row{
-                    Text(title, color = Green60, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                    Text(title, color = Green60,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.weight(1f))
                     Spacer(modifier = Modifier.width(170.dp))
-                    Icon(imageVector = Icons.Default.KeyboardArrowDown, contentDescription = "Seta para baixo", modifier = Modifier.size(20.dp))
+                    Icon(imageVector = Icons.Default.KeyboardArrowDown,
+                        contentDescription = "Seta para baixo",
+                        modifier = Modifier.size(20.dp))
                 }
                 Text(date)
                 Box(){
                     Spacer(modifier = Modifier.height(5.dp))
-                    Row(modifier = Modifier.height(20.dp).fillMaxWidth().border(width = 1.dp, shape = RoundedCornerShape(0,15, 15, 0), color = Grey20)) {
-                        Box(modifier = Modifier.background(Green60).fillMaxHeight().width(10.dp))
+                    Row(modifier = Modifier
+                        .height(20.dp)
+                        .fillMaxWidth()
+                        .border(width = 1.dp,
+                            shape = RoundedCornerShape(
+                                0,
+                                15, 15,
+                                0
+                            ),
+                            color = Grey20)) {
+                        Box(modifier = Modifier
+                            .background(Green60)
+                            .fillMaxHeight()
+                            .width(10.dp))
                         Text(especialidade, fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(doutor)
                     }
-
                 }
             }
         }
     }
 }
 @Composable
-fun BoxModel2(title: String, date: String, especialidade: String, doutor: String ) {
-    Row(modifier = Modifier.fillMaxWidth().height(110.dp).padding(horizontal = 15.dp)){
-        Box(contentAlignment = Alignment.TopStart, modifier = Modifier.height(180.dp).fillMaxWidth().border(width = 2.dp, shape = RoundedCornerShape(10.dp), color = Grey20)){
+fun BoxModel2(title: String,
+              date: String,
+              especialidade: String,
+              doutor: String
+) {
+    Row(modifier = Modifier
+        .fillMaxWidth()
+        .height(110.dp)
+        .padding(horizontal = 15.dp)
+    ){
+        Box(contentAlignment = Alignment.TopStart,
+            modifier = Modifier.height(180.dp)
+                .fillMaxWidth()
+                .border(width = 2.dp, shape = RoundedCornerShape(10.dp),
+                    color = Grey20)
+        ){
             Column(modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)) {
                 Row{
-                    Text(title, color = Green60, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                    Text(title, color = Green60,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.weight(1f))
                     Spacer(modifier = Modifier.width(170.dp))
-                    Icon(imageVector = Icons.Default.KeyboardArrowDown, contentDescription = "Seta para baixo", modifier = Modifier.size(20.dp))
-
+                    Icon(imageVector = Icons.Default.KeyboardArrowDown,
+                        contentDescription = "Seta para baixo",
+                        modifier = Modifier.size(20.dp)
+                    )
                 }
                 Box(modifier = Modifier.height(110.dp)){
                     Spacer(modifier = Modifier.height(5.dp))
-                    Row(modifier = Modifier.height(70.dp).fillMaxWidth().border(width = 1.dp, shape = RoundedCornerShape(0,15, 15, 0), color = Grey20)) {
-                        Box(modifier = Modifier.background(Green60).fillMaxHeight().width(10.dp))
+                    Row(modifier = Modifier.height(70.dp)
+                        .fillMaxWidth()
+                        .border(width = 1.dp, shape = RoundedCornerShape(0,15, 15, 0), color = Grey20)) {
+                        Box(modifier = Modifier
+                            .background(Green60)
+                            .fillMaxHeight()
+                            .width(10.dp))
                         Column {
 
                         Row(modifier = Modifier.fillMaxWidth()) {
-                                Icon(imageVector = Icons.Default.Done, contentDescription = "Seta para baixo", modifier = Modifier.size(20.dp))
+                                Icon(imageVector = Icons
+                                    .Default.Done,
+                                    contentDescription = "Seta para baixo",
+                                    modifier = Modifier.size(20.dp))
                                 Text(date, modifier = Modifier.width(100.dp))
-                                Icon(imageVector = Icons.Default.DateRange, contentDescription = "Seta para baixo", modifier = Modifier.size(20.dp))
+                                Icon(imageVector = Icons.Default.DateRange,
+                                    contentDescription = "Seta para baixo",
+                                    modifier = Modifier.size(20.dp))
                                 Text("10:30")
                             }
                             Column() {
@@ -173,7 +263,7 @@ fun UserInfo(paciente: Paciente){
 
 
 @Composable
-fun BottomBar() {
+fun BottomBar(navController: NavController) {
     BottomAppBar(modifier = Modifier.height(60.dp).fillMaxWidth() , containerColor = Green60
     ) {
         Row(
@@ -183,7 +273,7 @@ fun BottomBar() {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             IconButton(
-                onClick = { /* Ação do primeiro botão */ },
+                onClick = { navController.navigate("dashboard") },
                 modifier = Modifier.padding(16.dp)
             ) {
                 Icon(
@@ -193,7 +283,7 @@ fun BottomBar() {
             }
 
             IconButton(
-                onClick = { /* Ação do primeiro botão */ },
+                onClick = {navController.navigate("marcarConsulta") },
                 modifier = Modifier.padding(16.dp)
             ) {
                 Icon(
@@ -204,7 +294,7 @@ fun BottomBar() {
 
 
             IconButton(
-                onClick = { /* Ação do segundo botão */ },
+                onClick = { navController.navigate("carteirinha") },
                 modifier = Modifier.padding(16.dp)
             ) {
                 Icon(
@@ -215,7 +305,7 @@ fun BottomBar() {
             }
 
             IconButton(
-                onClick = { /* Ação do terceiro botão */ },
+                onClick = { },
                 modifier = Modifier.padding(16.dp)
             ) {
                 Icon(

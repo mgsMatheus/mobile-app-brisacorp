@@ -31,9 +31,10 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(navController = navController, startDestination = "login") {
                         composable(route = "login") { LoginScreen(navController)}
-                        composable(route = "dashboard") { DashboardScreen() }
-                        composable(route = "marcarConsulta") { MarcarConsultaScreen()}
-                        composable(route= "carteirinha") { CarteirinhaScreen()}
+                        composable(route = "dashboard") { DashboardScreen(navController) }
+                        composable(route = "marcarConsulta") { MarcarConsultaScreen(navController)}
+                        composable(route= "carteirinha") { CarteirinhaScreen(navController)}
+
                     }
                 }
             }

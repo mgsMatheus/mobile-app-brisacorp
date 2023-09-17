@@ -145,7 +145,10 @@ fun LoginScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(10.dp))
                 OutlinedTextField(
-                    colors = TextFieldDefaults.textFieldColors(containerColor = Color.White, focusedIndicatorColor = Color(0xFF41DF41)),
+                    colors = TextFieldDefaults.textFieldColors(
+                        containerColor = Color.White,
+                        focusedIndicatorColor = Color(0xFF41DF41)
+                    ),
                     value = password,
                     onValueChange = {
                         if (it.length <= tamanhoMaximo) password = it
