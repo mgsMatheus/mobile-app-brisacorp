@@ -316,38 +316,3 @@ fun BottomBar(navController: NavController) {
         }
     }
 }
-
-
-
-//        Column(
-//            modifier = Modifier.background(color = Color.Green)) {
-//
-//
-//            Column(
-//                verticalArrangement = Arrangement.Bottom,
-//                modifier = Modifier
-//                    .fillMaxSize()
-//                    .background(colorResource(id = R.color.cinza))
-//            ) {
-
-//                                    painter = painterResource(id = R.drawable.teste),
-//                                    contentDescription = "teste",
-//                                    modifier = Modifier.height(60.dp).width(180.dp),
-//                                )
-//                            }
-//                        }
-//                    }
-//                ) {
-//
-//
-//                }
-
-/*Row(
-    verticalAlignment = Alignment.Bottom,
-    modifier = Modifier
-        .fillMaxWidth()
-        .background(color = Color.Green)
-        .height(60.dp)
-) {
-
-}*/
