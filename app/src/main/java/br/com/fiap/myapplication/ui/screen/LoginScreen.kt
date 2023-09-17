@@ -64,11 +64,19 @@ fun LoginScreen(navController: NavController) {
         mutableStateOf("")
     }
 
+    var passwordError by remember {
+        mutableStateOf(false)
+    }
+
     var emailError by remember {
         mutableStateOf(false)
     }
 
     var isFocused by remember {
+        mutableStateOf(false)
+    }
+
+    var loginError by remember {
         mutableStateOf(false)
     }
 
@@ -167,16 +175,35 @@ fun LoginScreen(navController: NavController) {
                     },
                     visualTransformation = PasswordVisualTransformation(),
                 )
+                if (passwordError) {
+                    Text(
+                        text = "A senha é obrigatória!",
+                        modifier = Modifier.fillMaxWidth(),
+                        fontSize = 14.sp,
+                        color = Color.Red,
+                        textAlign = TextAlign.End
+                    )
+                } else {
+
+                }
 
             }
+
+
             //Spacer(modifier = Modifier.height(60.dp))
             Button(
-                modifier = Modifier.padding(end = 25.dp, start = 25.dp).background(Color(0xFF7BE37B)),
+                modifier = Modifier
+                    .padding(end = 25.dp, start = 25.dp)
+                    .background(Color(0xFF7BE37B)),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7BE37B)),
                 onClick = {
                     if (email.isEmpty()) {
                         emailError = true
-                    } else {
+                    }else if(password.isEmpty()){
+                        passwordError = true
+                    }else if(email != "admin" && password != "admin")
+                        loginError = true
+                    else {
                         navController.navigate("dashboard")
                     }
 
@@ -189,6 +216,17 @@ fun LoginScreen(navController: NavController) {
                         .fillMaxWidth(),
                     textAlign = TextAlign.Center
                 )
+            }
+            if (loginError) {
+                Text(
+                    text = "Email ou senha incorreta!",
+                    modifier = Modifier.fillMaxWidth().padding(end = 20.dp),
+                    fontSize = 14.sp,
+                    color = Color.Red,
+                    textAlign = TextAlign.End
+                )
+            } else {
+
             }
         }
     }
