@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -71,24 +72,26 @@ fun LoginScreen(navController: NavController) {
         mutableStateOf(false)
     }
 
+    val textFieldColors = TextFieldDefaults.textFieldColors(focusedIndicatorColor = Color.Green)
+
     //val textColor = if (isFocused) Color.Green else Color.Black
 
     val tamanhoMaximo = 8
 
     Box() {
-        Column(modifier = Modifier.padding(top = 80.dp)) {
+        Column(modifier = Modifier.padding(top = 70.dp)) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(190.dp)
+                    .height(200.dp),
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.logotechmed),
                     contentDescription = "logo",
                     modifier = Modifier
                         .size(170.dp)
-                        .padding(top = 16.dp)
+                        .padding(top = 14.dp)
                 )
             }
             //Spacer(modifier = Modifier.padding(16.dp))
@@ -99,7 +102,7 @@ fun LoginScreen(navController: NavController) {
             ) {
 
             }
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(35.dp))
             Column(
                 modifier = Modifier
                     .background(Color.White)
@@ -112,8 +115,11 @@ fun LoginScreen(navController: NavController) {
                     value = email,
                     onValueChange = { email = it },
                     modifier = Modifier.fillMaxWidth(),
+                    colors = TextFieldDefaults.textFieldColors(containerColor = Color.White, focusedIndicatorColor = Color(
+                        0xFF41DF41
+                    )
+                    ),
                     label = { Text(text = "Digite seu email") },
-
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                     trailingIcon = {
                         IconButton(onClick = { /*TODO*/ }) {
@@ -139,12 +145,15 @@ fun LoginScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(10.dp))
                 OutlinedTextField(
+                    colors = TextFieldDefaults.textFieldColors(containerColor = Color.White, focusedIndicatorColor = Color(0xFF41DF41)),
                     value = password,
                     onValueChange = {
                         if (it.length <= tamanhoMaximo) password = it
                     },
                     modifier = Modifier.fillMaxWidth(),
+
                     label = { Text(text = "Digite sua senha") },
+
                     trailingIcon = {
                         IconButton(onClick = { /*TODO*/ }) {
                             androidx.compose.material3.Icon(
@@ -159,7 +168,8 @@ fun LoginScreen(navController: NavController) {
             }
             //Spacer(modifier = Modifier.height(60.dp))
             Button(
-                modifier = Modifier.padding(end = 30.dp, start = 30.dp),
+                modifier = Modifier.padding(end = 25.dp, start = 25.dp).background(Color(0xFF7BE37B)),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7BE37B)),
                 onClick = {
                     if (email.isEmpty()) {
                         emailError = true
@@ -170,7 +180,7 @@ fun LoginScreen(navController: NavController) {
 
                 }) {
                 Text(
-                    text = "ENTRAR",
+                    text = "Fazer Login",
                     modifier = Modifier
                         .padding(8.dp)
                         .fillMaxWidth(),
